@@ -11,7 +11,7 @@ start_time = time.time_ns()
 
 
 
-f = open("test.txt", "r")
+f = open("input.txt", "r")
 left_list=list()
 right_list=list()
 for i,line in enumerate(f):
