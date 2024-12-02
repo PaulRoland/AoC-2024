@@ -9,9 +9,9 @@ import time
 start_time = time.time_ns()
 
 
-def asc_desc_continously(numbers):    
-    asc={1,2,3} #Continously ascending with these steps
-    desc={-1,-2,-3} #Continously descending
+def asc_desc_continuously(numbers):    
+    asc={1,2,3} #Continuously ascending with these steps
+    desc={-1,-2,-3} #Continuously descending
     
     diffs=[a-b for a,b in zip(numbers[1:],numbers[:-1])]
     
@@ -24,7 +24,7 @@ def asc_desc_continously(numbers):
 def safe2(numbers):
     #Probeer nu met elk afzonderlijk nummer missend
     for j in range(0,len(numbers)):
-        if asc_desc_continously(numbers[:j]+numbers[j+1:])==1:
+        if asc_desc_continuously(numbers[:j]+numbers[j+1:])==1:
             return 1
     return 0
                     
@@ -34,7 +34,7 @@ total_2=0
 f = open("input.txt", "r")
 for line in f:
     report=[int(d) for d in line.split(' ')]
-    total_1+=asc_desc_continously(report)
+    total_1+=asc_desc_continuously(report)
     total_2+=safe2(report)
 f.close()
 
