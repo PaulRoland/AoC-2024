@@ -5,17 +5,16 @@ Created on Sat Nov 30 22:09:16 2024
 @author: Paul
 """
 
-import numpy as np
 import time
 import re
 start_time = time.time_ns()
 
-total1 =0
+total1=0
 total2=0
 do=True
 
 f = open("input.txt", "r")
-for i,line in enumerate(f):
+for line in f:
     a=line.replace('\n','').split('mul(')
       
     for regel in a:  
