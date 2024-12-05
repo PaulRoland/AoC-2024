@@ -13,7 +13,6 @@ def check_update(update):
             return 0
     return update[int(len(update)/2)]
 
-
 def reorder_update(update):
     i=0
     while i<len(update)-1:
@@ -25,9 +24,7 @@ def reorder_update(update):
             update[i+1] = update[i]
             update[i] = tmp        
             i=max(0,i-1) #Als deze is gewijzigd moet de stap ervoor ook gecontroleerd worden
-            
-    page = check_update(update)
-    return page
+    return update[int(len(update)/2)]
 
 f = open("input.txt", "r")
 orders=[ [] for _ in range(100) ]
