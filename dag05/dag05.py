@@ -4,13 +4,12 @@ Created on Sat Nov 30 22:09:16 2024
 
 @author: Paul
 """
-import itertools as it
 import time
 start_time = time.time_ns()
 
 def check_update(update):
     for a,b in zip(update,update[1:]):
-        if [a,b] in orders:
+        if b in orders[a]:
             continue
         else:
             return 0
@@ -20,7 +19,7 @@ def check_update(update):
 def reorder_update(update):
     i=0
     while i<len(update)-1:
-        if [update[i],update[i+1]] in orders:
+        if update[i+1] in orders[update[i]]:
             i+=1
         else:
             #swap twee waardes
@@ -33,12 +32,13 @@ def reorder_update(update):
     return page
 
 f = open("input.txt", "r")
-orders=list()
+orders=[ [] for _ in range(100) ]
 updates=list()
 for i,line in enumerate(f):
     line=line.replace('(','').replace(')','').replace('=','').replace('\n','')
     if '|' in line:
-        orders.append([int(i) for i in line.split('|')])
+        [a,b]=[int(i) for i in line.split('|')]
+        orders[a].append(b)
     if ',' in line:
         updates.append([int(i) for i in line.split(',')])  
 f.close()
