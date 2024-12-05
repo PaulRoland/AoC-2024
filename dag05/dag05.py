@@ -9,9 +9,7 @@ start_time = time.time_ns()
 
 def check_update(update):
     for a,b in zip(update,update[1:]):
-        if b in orders[a]:
-            continue
-        else:
+        if b not in orders[a]:
             return 0
     return update[int(len(update)/2)]
 
