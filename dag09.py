@@ -8,23 +8,10 @@ Created on Sat Nov 30 22:09:16 2024
 import time
 start_time = time.time_ns()
 
-def visual(in_data):
-    output=''
-    i=0
-    total=0
-    for a in in_data:
-        for j in range(0,a[1]):
-            
-            output+=str(a[0])
-            if a[0]!='.':
-                total+=i*a[0]
-            i+=1
-    return total
-
-cur_id=0
 f = open("input.txt", "r")
 data=list()
 data2=list()
+cur_id=0
 for i,line in enumerate(f):
     line=line.replace('(','').replace(')','').replace('=','').replace('\n','')
     emptyspace=False
@@ -43,15 +30,14 @@ for i,line in enumerate(f):
             emptyspace=False   
 f.close()
 
-
-i=0
-back_c=len(data)-1
+## sort for p1
+i=0 #Index in data
+back_c=len(data)-1 #Index van laatste getal
 while i<len(data):
-    if data[i]=='.':
+    if data[i]=='.': #als de huidige locatie vrij is, vervang hem dan met het laatste getal
         data[i]=data[back_c]
         data[back_c]='.'
         back_c-=1
-        
     i+=1
     while data[back_c]=='.':
         back_c-=1
@@ -62,12 +48,11 @@ for i,s in enumerate(data[:back_c+1]):
     total_p1+=i*s
 
 
-##sort for 2
+##sort for p2
 i=0
 back_c=len(data2)-1
-running=True
-visual(data2)
-while running:
+
+while True:
     if back_c<0:
         break
     if data2[back_c][0]=='.':
@@ -82,7 +67,15 @@ while running:
             back_c+=1
             break
     back_c-=1
-total_p2=visual(data2)
+
+##Calculate score for 2
+i=0
+total_p2=0
+for [s,n] in data2:
+    for j in range(0,n):
+        if s!='.':
+            total_p2+=i*s
+        i+=1
 
 
 print("Part 1",total_p1)
