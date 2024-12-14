@@ -83,8 +83,8 @@ delta1=balk1[1]-balk1[0]
 delta2=balk2[1]-balk2[0]
 while True:
     i+=1
-    if (i-offset1)%delta1==0 and (i-offset2)%delta2==0:
-        total_p2=i
+    if ((offset1+delta1*i)-offset2)%delta2==0: #a+bn=c+dm
+        total_p2=(offset1+delta1*i)
         break    
 #print('Valt samen op',total_p2)
 
