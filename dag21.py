@@ -4,7 +4,6 @@ Created on Sat Nov 30 22:09:16 2024
 
 @author: Paul
 """
-from functools import cache
 import time
 start_time = time.time_ns()
 
@@ -24,9 +23,8 @@ numpad.update({'7':[0,0],'8':[0,1],'9':[0,2],'4':[1,0],'5':[1,1],'6':[1,2],'1':[
 nump_r=3
 nump_c=2
 
-
-newp=dict()
 ## Beste moves van x naar y
+newp=dict()
 #        from   to A   ^    >    v      <
 newp.update({'A':['A','<A','vA','<vA','v<<A']})
 newp.update({'^':['>A','A','v>A','vA','v<A']})
@@ -36,8 +34,7 @@ newp.update({'<':['>>^A','>^A','>>A','>A','A']})
 let_dict={'A':0,'^':1,'>':2,'v':3,'<':4}
 
 
-move_dict=dict()
-
+move_dict=dict()#Caching
 def moves(start_letter,end_letter,depth):
     key = start_letter+'_'+end_letter+'_'+str(depth)
     if key in move_dict:
@@ -69,7 +66,7 @@ for code in data:
         new_options=list()
         #find coordinates of current letter
         [new_nump_r,new_nump_c]=numpad[letter]
-        
+
         #We zitten op de onderste rij en moeten naar de linker kolom. Dan is er maar 1 kortste route
         if nump_r==3 and new_nump_c==0:
             #Eerst omhoog dan naar links
@@ -91,7 +88,6 @@ for code in data:
             #anders is er maar 1 optie
             new_options.append('<'*max(nump_c-new_nump_c,0)+'>'*max(new_nump_c-nump_c,0)+'^'*max(nump_r-new_nump_r,0)+'v'*max(new_nump_r-nump_r,0)+'A')
                              
-                
         nump_r=new_nump_r
         nump_c=new_nump_c
         options=list(outputs)
@@ -117,8 +113,6 @@ for code in data:
             total_moves+=moves(b,e,25-1)
         min_code=min(min_code,total_moves)
     total_p2+=int(code[:3])*min_code        
-
-
 
 print("Part 1",total_p1)
 print("Part 2",total_p2)
