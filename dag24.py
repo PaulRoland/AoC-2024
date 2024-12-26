@@ -23,10 +23,9 @@ def connect(key):
     elif graph[key][3]=='OR':
         graph[key][0] =a | b
     return graph[key][0]
-                         
+
+graph=dict()                         
 f = open("input.txt", "r")
-inputpart2=False
-graph=dict()
 for i,line in enumerate(f):
     keys=line.replace('\n','').split(' ')
     if len(keys)>2:
